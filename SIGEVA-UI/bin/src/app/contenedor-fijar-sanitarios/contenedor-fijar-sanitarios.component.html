@@ -1,0 +1,10 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="seccion contenedor">
+  <h1 class="centrar-texto">FIJAR SANITARIOS A CENTRO</h1>
+  <div class="contenedor-items">
+    <app-sanitario-fijar-centro *ngFor="let sanitario of sanitarios"
+                                [sanitario]=sanitario
+    ></app-sanitario-fijar-centro>
+  </div>
+</div>

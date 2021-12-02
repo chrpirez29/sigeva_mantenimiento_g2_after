@@ -1,0 +1,10 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="separation"></div>
+<div class="separation"></div>
+<div class="separation"></div>
+<div class="seccion contenedor">
+  <div class="contenedor-citas">
+    <app-cita-editar *ngFor="let cita of citas" [cita]="cita"></app-cita-editar>
+  </div>
+</div>

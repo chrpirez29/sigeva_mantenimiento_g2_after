@@ -1,0 +1,34 @@
+<div class="contenedor-citas2">
+  <div class="cita-screen">
+    <div class="cita-form">
+      <h1 class="titulo">Cita {{this.cita.dosis}}</h1>
+      <hr>
+      <table aria-describedby="Información del producto">
+        <tr>
+          <th scope="row">
+            <p class="fontawesome-calendar"></p>
+          </th>
+          <td>
+            <p>{{this.cita.cupo.fechaYHoraInicio | date : 'medium'}}</p>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <p class="fontawesome-hospital"></p>
+          </th>
+          <td>
+            <p>{{this.cita.paciente.centroSalud.nombreCentro}}</p>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <p class="fontawesome-map-marker"></p>
+          </th>
+          <td>
+            <p>{{this.cita.paciente.centroSalud.direccion}}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

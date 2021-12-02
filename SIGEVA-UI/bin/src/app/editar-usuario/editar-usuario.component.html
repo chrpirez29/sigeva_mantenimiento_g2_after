@@ -1,0 +1,123 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="register">
+  <div class="register-screen">
+    <div class="register-form">
+      <form #editarUsuariosForm="ngForm" id="form">
+        <h1>EDITAR USUARIO</h1>
+
+        <div class="control-group">
+          <strong>Rol del usuario:</strong>
+          <select name="rol" [(ngModel)]="usuario.rol.nombre" disabled>
+            <option>{{usuario.rol.nombre}}</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <strong>Centro asignado:</strong>
+           <select [ngModel]="usuario.centroSalud" (ngModelChange)="onChangeCentro($event)" name="selCentro" id="selCentro">
+            <option *ngFor="let centro of centros" [ngValue]="centro">{{centro.nombreCentro}}</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <strong>Nombre de Usuario:</strong>
+          <input type="email" placeholder="Nombre de usuario" name="username" #username="ngModel"
+                 [(ngModel)]="usuario.username" required>
+          <div>
+            <small *ngIf="!username.valid && username.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Correo del usuario:</strong>
+          <input type="email" placeholder="Correo electrónico" name="correo" #correo="ngModel"
+                 [(ngModel)]="usuario.correo" required>
+          <div>
+            <small *ngIf="!correo.valid && correo.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Nueva contraseña:</strong>
+          <input class="pwd" [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" #password="ngModel"
+                 [(ngModel)]="newPassword" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_].{7,}">
+          <button mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <div>
+            <small *ngIf="!password.valid" class="textoColorRojo">
+              La contraseña debe ser de 8 caracteres y contener al menos: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>DNI del usuario:</strong>
+          <input type="email" placeholder="DNI" name="dni" #dni="ngModel" [(ngModel)]="usuario.dni" required>
+          <div>
+            <small *ngIf="!dni.valid && dni.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+        <div class="control-group">
+          <strong>Nombre del usuario:</strong>
+          <input type="email" placeholder="Nombre" name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre"
+                 required>
+          <div>
+            <small *ngIf="!nombre.valid && nombre.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Apellidos:</strong>
+          <input type="text" placeholder="Apellidos" name="apellidos" #apellidos="ngModel"
+                 [(ngModel)]="usuario.apellidos" required>
+          <div>
+            <small *ngIf="!apellidos.valid && apellidos.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Fecha de nacimiento:</strong>
+          <input type="date" placeholder="Fecha Nacimiento" name="fechaNacimiento" #fechaNacimiento="ngModel"
+                 [(ngModel)]="usuario.fechaNacimiento" required>
+          <div>
+            <small *ngIf="!fechaNacimiento.valid && fechaNacimiento.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Selecciona la imagen de perfil:</strong>
+          <input (change)="capturarFile($event)" type="file" accept="image/png, image/jpeg">
+        </div>
+
+        <img *ngIf="usuario.imagen" alt="imagen usuario" width="100" height="100" src={{usuario.imagen}}>
+
+        <div class="alineacion-botones">
+          <button class="btn-cancel" type="submit" [disabled]="editarUsuariosForm.invalid"
+                  (click)=openDialogCancelar()>CANCELAR
+          </button>
+          <button class="btn" type="submit" [disabled]="editarUsuariosForm.invalid"
+                  (click)=openDialogGuardar()>GUARDAR
+          </button>
+        </div>
+      </form>
+
+      <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+      <p class="resaltadoPositivo" *ngIf="message">{{message}}</p>
+    </div>
+  </div>
+</div>
+

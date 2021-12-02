@@ -1,0 +1,114 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="contenedor">
+  <div class="separation"></div>
+  <app-mensaje-configuracion></app-mensaje-configuracion>
+
+<div class="register">
+  <div class="register-screen">
+    <div class="register-form">
+      <form #crearUsuariosForm="ngForm" id="form">
+        <h1>CREAR USUARIOS</h1>
+
+        <div class="control-group">
+          <strong>Elige el tipo de usuario a crear: </strong>
+          <select name="rol" [(ngModel)]="usuario.rol" (ngModelChange)="onChangeRol($event)" name="selRol" [disabled]="!existeConfiguracion">
+            <option [ngValue]="rol" *ngFor="let rol of roles">{{rol.nombre}}</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <select [ngModel]="usuario.centroSalud" (ngModelChange)="onChangeCentro($event)" name="selCentro" [disabled]="!existeConfiguracion">
+            <option *ngFor="let centro of centros" [ngValue]="centro">{{centro.nombreCentro}}</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <input type="email" placeholder="Nombre de usuario" name="username" #username="ngModel"
+                 [(ngModel)]="usuario.username" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!username.valid && username.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <input type="email" placeholder="Correo electrónico" name="correo" #correo="ngModel"
+                 [(ngModel)]="usuario.correo" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!correo.valid && correo.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <input class="pwd" [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" #password="ngModel"
+                 [(ngModel)]="pwd" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_].{7,}"
+                 [disabled]="!existeConfiguracion">
+
+          <button mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <div>
+            <small *ngIf="!password.valid && password.touched" class="textoColorRojo">
+              La contraseña debe ser de 8 caracteres y contener al menos: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <input type="email" placeholder="DNI" name="dni" #dni="ngModel" [(ngModel)]="usuario.dni" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!dni.valid && dni.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+        <div class="control-group">
+          <input type="email" placeholder="Nombre" name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre"
+                 required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!nombre.valid && nombre.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <input type="text" placeholder="Apellidos" name="apellidos" #apellidos="ngModel"
+                 [(ngModel)]="usuario.apellidos" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!apellidos.valid && apellidos.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Fecha de nacimiento:</strong>
+          <input type="date" placeholder="Fecha Nacimiento" name="fechaNacimiento" #fechaNacimiento="ngModel"
+                 [(ngModel)]="usuario.fechaNacimiento" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!fechaNacimiento.valid && fechaNacimiento.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Selecciona la imagen de perfil:</strong>
+          <input (change)="capturarFile($event)" type="file" accept="image/png, image/jpeg" [disabled]="!existeConfiguracion">
+        </div>
+
+        <img *ngIf="usuario.imagen" alt="imagen usuario" width="100" height="100" src={{usuario.imagen}}>
+        <button class="btn" type="submit" (click)=enviarDatosBack() [disabled]="crearUsuariosForm.invalid || !existeConfiguracion">Crear usuario</button>
+      </form>
+
+      <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+      <p class="resaltadoPositivo" *ngIf="message">{{message}}</p>
+    </div>
+  </div>
+</div>
+</div>

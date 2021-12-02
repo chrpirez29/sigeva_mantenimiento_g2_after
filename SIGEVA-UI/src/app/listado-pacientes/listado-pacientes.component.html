@@ -1,0 +1,95 @@
+<app-barra-navegacion></app-barra-navegacion>
+<div class=contenedor-dividido>
+  <div class="listado-form">
+    <div class="separation"></div>
+
+    <!-- Inicio de la lista de pacientes -->
+    <div class="listado">
+      <div class="contenedor-items">
+        <div class="contenedor-paciente" *ngFor="let cita of this.citas">
+          <div class="control-group">
+            <img class="campo-pacientes" alt="imagen paciente" width="100" height="100" src="{{cita.paciente.imagen}}">
+            <h3 class="campo-pacientes">{{cita.paciente.nombre}}</h3>
+            <h4 class="entypo-vcard campo-pacientes"> {{cita.paciente.dni}}</h4>
+            <h4
+              class="entypo-clock campo-pacientes"> {{this.citaSeleccionada.cupo.fechaYHoraInicio | date:'shortTime'}}</h4>
+            <button class="btn-vacunar campo-pacientes"
+                    *ngIf="cita.paciente.numDosisAplicadas < cita.dosis && this.dateSelectedIsToday"
+                    (click)="this.vacunar(cita)">Seleccionar
+            </button>
+            <p *ngIf="cita.paciente.numDosisAplicadas == cita.dosis" class="stick entypo-check"></p>
+            <img class="campo-pacientes extra" src="../assets/icons/vaccine.png" width="30px"
+                 height="30px" *ngIf="cita.paciente.numDosisAplicadas>=1" alt="icono vacuna">
+            <img class="campo-pacientes extra" src="../assets/icons/vaccine.png" width="30px"
+                 height="30px" *ngIf="cita.paciente.numDosisAplicadas==2" alt="icono vacuna">
+          </div>
+        </div>
+      </div>
+      <div class="control-group" *ngIf="this.citasVacio">
+        <div class="contenedor">
+          <h1 class="resaltadoNegativo">No hay citas programadas</h1>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Division de la pantalla -->
+
+  <div class="vacunas">
+    <div class="separation"></div>
+    <div class="date-picker">
+      <table class="tabla-imagenes" aria-describedby="Tabla de configuracion">
+        <th scope="row"></th>
+        <th scope="row"></th>
+        <tr>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Input & change events"
+                   (dateChange)="dataChangeEvent('change', $event)" (dateInput)="dataChangeEvent('change', $event)"
+                   [formControl]="today">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </tr>
+        <tr>
+          <button class="stick date-button" (click)="citasHoy()">Hoy</button>
+        </tr>
+      </table>
+    </div>
+    <div class="vacuna-form">
+      <div class="vacuna-group">
+        <div class="mensaje-guia" *ngIf="this.pacienteSeleccionado">
+          <img class="campo-pacientes" alt="imagen paciente" width="100" height="100"
+               src="{{this.citaSeleccionada.paciente.imagen}}">
+          <h3 class="campo-pacientes">{{this.citaSeleccionada.paciente.nombre}}</h3>
+          <h4 class="entypo-vcard campo-pacientes"> {{this.citaSeleccionada.paciente.dni}}</h4>
+          <h4
+            class="entypo-clock campo-pacientes"> {{this.citaSeleccionada.cupo.fechaYHoraInicio | date:'shortTime'}}</h4>
+          <h4 class="campo-pacientes">Fecha
+            nacimiento: {{this.citaSeleccionada.paciente.fechaNacimiento | date:'mediumDate'}}</h4>
+          <h4 class="campo-pacientes">Dosis recibidas: {{this.citaSeleccionada.paciente.numDosisAplicadas}}</h4>
+          <h4 class="campo-pacientes">Dosis de la cita: {{this.citaSeleccionada.dosis}}</h4>
+          <button class="btn-vacunar campo-pacientes" (click)="this.aplicarDosis()">Vacunar</button>
+        </div>
+        <div class="control-group" *ngIf="!this.pacienteSeleccionado">
+          <div class="mensaje-guia">
+            <h2>Selecciona un paciente</h2>
+            <table class="tabla-imagenes" aria-describedby="Tabla de configuracion">
+              <th scope="row"></th>
+              <th scope="row"></th>
+              <tr>
+                <img class="campo-pacientes" src="../assets/icons/usuarioGrande.png" width="150px"
+                     height="150px" alt="icono usuario">
+              </tr>
+              <tr>
+                <img class="campo-pacientes" src="../assets/icons/center-align.png" width="100px"
+                     height="100px" alt="icono center align">
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="seccion contenedor">
+  <div class="contenedor-citas">
+    <div class="separation"></div>
+    <div class="solicitud-cita">
+      <div class="register-form">
+        <h1>{{this.mensajeError}}</h1>
+        <h1>{{this.mensaje}}</h1>
+        <div class="control-group">
+          <button *ngIf=!this.solicitada class="btn" (click)=solicitarCita()>Solicitar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="separation"></div>
+
+    <div *ngIf=this.solicitada class="cita-screen">
+      <div class="cita-form">
+        <h1 class="titulo">Cita 1</h1>
+        <hr>
+        <table aria-describedby="Información del producto">
+          <tr>
+            <th scope="row">
+              <p class="fontawesome-calendar"></p>
+            </th>
+            <td>
+              <p>{{this.citas[0].cupo.fechaYHoraInicio | date : 'medium'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p class="fontawesome-hospital"></p>
+            </th>
+            <td>
+              <p>{{this.citas[0].paciente.centroSalud.nombreCentro}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p class="fontawesome-map-marker"></p>
+            </th>
+            <td>
+              <p>{{this.citas[0].paciente.centroSalud.direccion}}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="separation"></div>
+
+    <div *ngIf=this.solicitada class="cita-screen">
+      <div class="cita-form">
+        <h1 class="titulo">Cita 2</h1>
+        <hr>
+        <table aria-describedby="Información del producto">
+          <tr>
+            <th scope="row">
+              <p class="fontawesome-calendar"></p>
+            </th>
+            <td>
+              <p>{{this.citas[1].cupo.fechaYHoraInicio | date : 'medium'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p class="fontawesome-hospital"></p>
+            </th>
+            <td>
+              <p>{{this.citas[1].paciente.centroSalud.nombreCentro}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <p class="fontawesome-map-marker"></p>
+            </th>
+            <td>
+              <p>{{this.citas[1].paciente.centroSalud.direccion}}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

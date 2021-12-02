@@ -1,0 +1,49 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="register">
+  <div class="register-screen">
+    <div class="register-form">
+      <form #editarCentroSaludForm="ngForm" id="editarCs">
+        <div class="control-group">
+          <strong>Nombre centro de salud:</strong> <input type="text"
+                                                          placeholder="Nombre centro salud" #nombreCS="ngModel"
+                                                          [(ngModel)]="cs.nombreCentro" name="nombreCentro" required>
+          <div>
+            <small *ngIf="!nombreCS.valid && nombreCS.touched"
+                   class="textoColorRojo"> El campo no puede estar vacio </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Dirección:</strong> <input type="text"
+                                             placeholder="Dirección centro salud" #direccionCS="ngModel"
+                                             [(ngModel)]="cs.direccion" name="direccion" required>
+          <div>
+            <small *ngIf="!direccionCS.valid && direccionCS.touched"
+                   class="textoColorRojo"> El campo no puede estar vacio </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Nº Vacunas:</strong> <input type="number" placeholder="Nº vacunas"
+                                              #vacunasCS="ngModel" [(ngModel)]="cs.numVacunasDisponibles"
+                                              name="numVacunasDisponibles" required>
+          <div>
+            <small *ngIf="!vacunasCS.valid && vacunasCS.touched"
+                   class="textoColorRojo"> El campo no puede estar vacio </small>
+          </div>
+        </div>
+        <div class="alineacion-botones">
+          <button class="btn-cancel" type="submit" [disabled]="editarCentroSaludForm.invalid"
+                  (click)=openDialogCancelar()>CANCELAR
+          </button>
+          <button class="btn" type="submit" [disabled]="editarCentroSaludForm.invalid"
+                  (click)=openDialogGuardar()>Guardar Cambios
+          </button>
+        </div>
+      </form>
+      <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+      <p class="resaltadoPositivo" *ngIf="message">{{message}}</p>
+    </div>
+  </div>
+</div>

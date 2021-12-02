@@ -1,0 +1,54 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="contenedor">
+  <app-mensaje-configuracion></app-mensaje-configuracion>
+<div class="register">
+  <div class="register-screen">
+    <div class="register-form">
+      <form #crearCentroForm="ngForm" (ngSubmit)=enviarDatosBack() id="form">
+        <h1>CREAR CENTRO DE SALUD</h1>
+
+        <div class="control-group">
+          <input type="text" placeholder="Nombre del centro de salud" name="nombreCentro" #nombreCentro="ngModel"
+                 [(ngModel)]="centroSalud.nombreCentro" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!nombreCentro.valid && nombreCentro.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <input type="text" placeholder="Dirección del Centro de Salud" name="direccionCentro"
+                 #direccionCentro="ngModel" [(ngModel)]="centroSalud.direccion" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!direccionCentro.valid && direccionCentro.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <strong>Número de Vacunas Disponibles:</strong>
+          <input type="number" min="0" placeholder="Número de Vacunas Disponibles" name="numVacunas"
+                 #numVacunas="ngModel" [(ngModel)]="centroSalud.numVacunasDisponibles" required [disabled]="!existeConfiguracion">
+          <div>
+            <small *ngIf="!numVacunas.valid && numVacunas.touched" class="textoColorRojo">
+              El campo no puede estar vacío
+            </small>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <button class="btn" type="submit" [disabled]="crearCentroForm.invalid || !existeConfiguracion">Crear Centro</button>
+        </div>
+      </form>
+
+      <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+      <p class="resaltadoPositivo" *ngIf="message">{{message}}</p>
+      <p class="resaltadoNeutral" *ngIf="generandoCupos">{{generandoCupos}}</p>
+
+    </div>
+  </div>
+</div>
+</div>

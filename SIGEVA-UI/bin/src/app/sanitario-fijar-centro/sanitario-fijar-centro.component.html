@@ -1,0 +1,19 @@
+<div class="item usuario">
+  <div class="contenido-item centrar-texto">
+
+    <div class="control-group">
+      <img alt="imagen usuario" width="100" height="100" src={{sanitario.imagen}}>
+      <h3 class="centrar-texto fontawesome-user">  {{sanitario.nombre}} {{sanitario.apellidos}}</h3>
+      <h3 class="centrar-texto fontawesome-hospital">  {{sanitario.centroSalud.nombreCentro}}</h3>
+      <p>Selecciona el centro a fijar: </p>
+      <select name="rol" [(ngModel)]="newCentroSeleccionado.nombreCentro">
+        <option *ngFor="let centro of centros">{{centro.nombreCentro}}</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <button class="btn" type="submit" (click)="enviarDatosBack()">Fijar Centro</button>
+    </div>
+    <p>{{errorMessage}}</p>
+    <p>{{message}}</p>
+  </div>
+</div>

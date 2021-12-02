@@ -1,0 +1,13 @@
+.btn {
+  max-width: 150px;
+  margin: 10px;
+}
+
+.btn-cancel {
+  max-width: 150px;
+  margin: 10px;
+}
+
+input.pwd {
+  max-width: 360px;
+}

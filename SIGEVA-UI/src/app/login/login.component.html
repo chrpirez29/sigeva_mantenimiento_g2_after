@@ -1,0 +1,36 @@
+<body>
+<div id="contenedor">
+  <div id="central">
+    <div id="login">
+      <div class="titulo">
+        Bienvenido
+      </div>
+      <form id="loginform" #loginForm="ngForm" (ngSubmit)=login()>
+
+        <img src="assets/icons/usuario.png" alt="icono usuario">
+        <input type="text" name="username" placeholder="Usuario" [(ngModel)]="loginUsuario.username" #username="ngModel"
+               required>
+        <div>
+          <small *ngIf="!username.valid && username.touched" class="resaltadoNegativo">
+            El campo no puede estar vacío
+          </small>
+        </div>
+
+        <img src="assets/icons/contrasena.png" alt="icono contrasena">
+        <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" #contrasena="ngModel"
+               required>
+        <div>
+          <small *ngIf="!contrasena.valid && contrasena.touched" class="resaltadoNegativo">
+            El campo no puede estar vacío
+          </small>
+        </div>
+
+
+        <button type="submit" title="Ingresar" name="Ingresar" [disabled]="loginForm.invalid">Log in</button>
+
+      </form>
+      <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+    </div>
+  </div>
+</div>
+</body>

@@ -1,0 +1,31 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="contenedor">
+  <h1>BIENVENIDO {{usuario.nombre}}!!</h1>
+  <div class="register">
+    <div class="register-screen">
+      <div class="register-form">
+        <div class="control-group">
+          <img alt="imagen usuario" width="150" height="150" src={{usuario.imagen}}>
+        </div>
+
+        <div class="alineación-izquierda control-group">
+          <mat-icon>person</mat-icon>
+          <p>{{usuario.nombre}} {{usuario.apellidos}}</p>
+        </div>
+
+        <div class="alineación-izquierda control-group">
+          <mat-icon>local_hospital</mat-icon>
+          <p>{{usuario.centroSalud.nombreCentro}}</p>
+        </div>
+
+        <div class="alineación-izquierda control-group">
+          <mat-icon>verified_user</mat-icon>
+          <p>{{usuario.rol.nombre}}</p>
+        </div>
+
+        <button class="btn space" (click)=openDialogCerrarSesion()>CERRAR SESIÓN</button>
+      </div>
+    </div>
+  </div>
+</div>

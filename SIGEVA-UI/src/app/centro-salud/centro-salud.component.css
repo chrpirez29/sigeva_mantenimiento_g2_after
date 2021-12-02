@@ -1,0 +1,42 @@
+.item {
+  width: 400px;
+}
+
+.btn {
+  max-width: 150px;
+  margin: 10px;
+}
+
+.btn-cancel {
+  max-width: 150px;
+  margin: 10px;
+}
+
+.alineacion-izquierda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+mat-icon {
+  margin-right: 5px;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+p {
+  margin: 0;
+  font-size: 20px;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+img {
+  margin-right: 10px;
+}
+
+

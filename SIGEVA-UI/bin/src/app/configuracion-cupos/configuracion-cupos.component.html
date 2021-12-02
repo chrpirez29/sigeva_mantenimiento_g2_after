@@ -1,0 +1,136 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="contenedor">
+  <div class="separation"></div>
+  <h1 class="page-name">CONFIGURACIÓN DE CUPOS</h1>
+  <div class="register">
+    <div *ngIf="this.configuracionExistente == true" class="register-screen">
+      <div class="register-form">
+        <h1>Datos de la vacunación</h1>
+        <table aria-describedby="desc_tabla">
+          <tr>
+            <th scope="col">Periodo de vacunación</th>
+            <th scope="col">Duración de las jornadas</th>
+          </tr>
+          <tr>
+            <td>
+              <p class="entypo-calendar"> {{this.fechaInicio | date : 'mediumDate'}} - 31 Dec, 2021</p>
+            </td>
+            <td>
+              <p class="entypo-back-in-time"> {{this.fechaInicio | date: 'shortTime'}}
+                - {{this.fecha | date:'shortTime'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th id="tabla"></th>
+          </tr>
+          <tr>
+            <td> </td>
+          </tr>
+          <tr>
+            <th scope="col">Tamaño de los cupos</th>
+            <th scope="col">Duración de los cupos</th>
+          </tr>
+          <tr>
+            <td><p class="fontawesome-group"> {{this.numeroPacientes}} personas</p></td>
+            <td><p class="entypo-clock"> {{this.duracionMinutos}} min</p></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="separation"></div>
+    <div *ngIf="this.configuracionExistente == true" class="register-screen">
+      <div class="register-form">
+        <h1>Estadísticas</h1>
+        <table aria-describedby="tabla-estadisticas">
+          <tr>
+            <th scope="row" class="entypo-chart-line"> Pacientes vacunados/minuto:</th>
+            <td>
+              <p>{{numeroPacientes / duracionMinutos | number: '1.0-1'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="entypo-gauge"> Pacientes vacunados/día:</th>
+            <td>
+              <p>{{((this.duracionJornadaHoras * 60 + this.duracionJornadaMinutos) / this.duracionMinutos) * this.numeroPacientes | number: '1.0-0'}}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="this.configuracionExistente == false" class="register-screen">
+      <div class="register-form">
+        <h1>FECHAS Y HORARIOS DE LA VACUNACIÓN</h1>
+        <div class="control-group"></div>
+      </div>
+      <p></p>
+
+      <div class="control-group">Fecha y hora de inicio
+        <input type="datetime-local" placeholder="Fecha de inicio y hora de inicio" [(ngModel)]="fechaInicio">
+      </div>
+      <div class="control-group">Duración Jornada (HH:MM) Ej: 12:30, 12 horas y 30 minutos)
+        <input type="time" min="0" max="24" placeholder="Duaracion (horas)" [(ngModel)]="duracionJornada">
+      </div>
+      <div class="control-group">
+      </div>
+      <div class="control-group">
+        <h2>Duración total: {{duracionJornadaHoras}} horas y {{duracionJornadaMinutos}}min</h2>
+      </div>
+      <div class="control-group">
+        <h2 *ngIf="fechaCreada == true">Hora fin de las jornadas: {{fecha | date: 'shortTime'}}</h2>
+        <button class="btn" (click)="calcularHoraFin()">Calcular duracion total</button>
+      </div>
+      <div class="control-group">
+        <h2 class="mensajeError">{{this.mensajeControlDuracion}}</h2>
+      </div>
+    </div>
+    <div class="separation"></div>
+    <div *ngIf="this.configuracionExistente == false" class="register-screen">
+      <div class="register-form">
+        <h1>TAMAÑO DE LOS CUPOS</h1>
+        <div class="control-group"></div>
+      </div>
+      <p></p>
+      <div *ngIf="fechaCreada == false" class="control-group">
+        <h3>Completa el horario para calcular la hora de fin de las jornadas de vacunación</h3>
+      </div>
+      <div *ngIf="fechaCreada == true" class="control-group">Duración del cupo (minutos)
+        <input type="number" min="0" max="59" placeholder="Duracion del cupo" [(ngModel)]="duracionMinutos">
+      </div>
+      <div *ngIf="fechaCreada == true" class="control-group">Número de pacientes
+        <input type="number" placeholder="Duracion del cupo" [(ngModel)]="numeroPacientes">
+      </div>
+
+    </div>
+
+    <div class="separation"></div>
+    <div *ngIf="this.configuracionExistente == false" class="register-screen">
+      <div class="register-form">
+        <h1>ESTADÍSTICAS</h1>
+        <div *ngIf="!(fechaCreada == true && duracionMinutos > 0 && numeroPacientes > 0)" class="control-group">
+          <h3>Indica el tamaño de los cupos para conocer las estadísticas</h3>
+        </div>
+        <div *ngIf="(fechaCreada == true && duracionMinutos > 0 && numeroPacientes > 0)" class="control-group">
+          <h1>Ratio de pacientes/minuto: {{numeroPacientes / duracionMinutos | number: '1.0-1'}}</h1>
+          <h1>Pacientes vacunados por
+            día: {{((this.duracionJornadaHoras * 60 + this.duracionJornadaMinutos) / this.duracionMinutos) * this.numeroPacientes | number: '1.0-0'}}</h1>
+        </div>
+        <div *ngIf="(fechaCreada == true && duracionMinutos > 0 && numeroPacientes > 0)" class="control-group">
+          <button class="btn" (click)="aceptarEstadisticasF()">Aceptar estadísticas</button>
+        </div>
+      </div>
+    </div>
+    <div class="separation"></div>
+    <div *ngIf="this.aceptarEstadisticas == true && this.configuracionExistente == false" class="control-group"
+         class="register-screen">
+      <div class="register-form">
+        <h1>CONFIRMAR</h1>
+        <div class="control-group">
+          <button class="btn" (click)="(crearConfiguracionCupos())">Guardar configuración</button>
+          <h1 *ngIf="this.solicitada == true">{{this.mensaje}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

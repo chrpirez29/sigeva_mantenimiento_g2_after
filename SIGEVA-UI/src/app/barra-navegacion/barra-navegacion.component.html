@@ -1,0 +1,56 @@
+<header class="contenedor site-header inicio">
+  <div class="contenido-header">
+    <div class="barra">
+      <a href="index.html">
+        <img src="../assets/SIGEVA.jpg" width="240" height="45" alt="Logotipo SIGEVA">
+      </a>
+      <nav id="navegacion" class="navegacion">
+
+        <button mat-button routerLink="/home" class="btn-nav">Mi usuario</button>
+
+        <button mat-button *ngIf="isLogged && (rol === 'Administrador' || rol === 'SuperAdmin')"
+                [matMenuTriggerFor]="menuUsuarios" class="btn-nav">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          Usuarios
+        </button>
+        <mat-menu #menuUsuarios="matMenu">
+          <button mat-menu-item routerLink="/crearUsuarios">Crear Usuario</button>
+          <button mat-menu-item routerLink="/usuariosSistema">Ver todos los usuarios</button>
+        </mat-menu>
+
+        <button mat-button *ngIf="isLogged && (rol === 'Administrador' || rol === 'SuperAdmin')"
+                [matMenuTriggerFor]="menuCentros" class="btn-nav">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          Centros
+        </button>
+        <mat-menu #menuCentros="matMenu">
+          <button mat-menu-item routerLink="/crearCS">Crear Centro</button>
+          <button mat-menu-item routerLink="/centrosSistema">Ver todos los centros</button>
+          <button mat-menu-item routerLink="/indicarDosisVacunas">Añadir vacunas a un centro</button>
+        </mat-menu>
+
+        <button mat-button *ngIf="isLogged && (rol === 'Administrador' || rol === 'SuperAdmin')" routerLink="/cnfgCupos"
+                class="btn-nav">Configurar Cupos
+        </button>
+
+        <button mat-button *ngIf="isLogged && (rol === 'Paciente' || rol === 'SuperAdmin')" routerLink="/solicitarCita"
+                class="btn-nav">Solicitar Cita
+        </button>
+
+        <button mat-button *ngIf="isLogged && (rol === 'Paciente' || rol === 'SuperAdmin')" routerLink="/misCitas"
+                class="btn-nav">Mis Citas
+        </button>
+
+        <button mat-button *ngIf="isLogged && (rol === 'Sanitario' || rol === 'SuperAdmin')"
+                routerLink="/listarPacientes" class="btn-nav">Vacunar pacientes
+        </button>
+
+        <button mat-button *ngIf="isLogged" (click)="openDialogCerrarSesion()" class="btn-nav" style="color: red">
+          <mat-icon>exit_to_app</mat-icon>
+          Cerrar Sesión
+        </button>
+
+      </nav>
+    </div>
+  </div>
+</header>

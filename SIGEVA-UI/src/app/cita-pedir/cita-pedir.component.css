@@ -1,0 +1,33 @@
+@import url(https://weloveiconfonts.com/api/?family=fontawesome);
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+  font-size: 30px;
+}
+
+.contenedor-citas2 {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cita-screen {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  width: 270px;
+  margin: 20px;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.cita-form {
+  text-align: left;
+}
+
+p {
+  font-size: 18px;
+  margin: 4px;
+}

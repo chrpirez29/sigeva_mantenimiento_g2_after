@@ -1,0 +1,44 @@
+<div class="cita-screen">
+  <div class="cita-form">
+    <h1 class="titulo">Cita {{this.cita.dosis}}</h1>
+
+    <div class="alineacion-izquierda">
+      <mat-icon *ngIf="!editMode">access_time</mat-icon>
+      <p *ngIf="!editMode">{{this.cita.cupo.fechaYHoraInicio | date : 'medium'}}</p>
+    </div>
+
+    <div>
+      <mat-form-field *ngIf="editMode" class="calendar" appearance="fill">
+        <mat-label>Selecciona el nuevo día</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (dateInput)="addEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" *ngIf="daySelected && editMode" class="input-hora">
+        <mat-label>Selecciona la nueva hora</mat-label>
+        <mat-select [ngModel]="cupoSeleccionado" name="hora" (ngModelChange)="onChangeHora($event)">
+          <mat-option *ngFor="let rango of rangosHoras"
+                      [value]="rango">{{rango.fechaYHoraInicio.toTimeString().substr(0, 5)}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="alineacion-izquierda">
+      <mat-icon> local_hospital</mat-icon>
+      <p>{{this.cita.cupo.centroSalud.nombreCentro}}</p>
+    </div>
+
+    <div class="alineacion-botones">
+      <button class="btn-cancel" *ngIf="!editMode" (click)=openDialogEliminar()>ELIMINAR</button>
+      <button class="btn" (click)="editarCita()" *ngIf="!editMode">EDITAR</button>
+      <button class="btn-cancel" *ngIf="editMode" (click)=openDialogCancelar()>CANCELAR</button>
+      <button class="btn" (click)="editarCita()" *ngIf="editMode" (click)=openDialogGuardar()>GUARDAR</button>
+    </div>
+
+    <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+    <p class="resaltadoPositivo" *ngIf="message">{{message}}</p>
+
+  </div>
+</div>

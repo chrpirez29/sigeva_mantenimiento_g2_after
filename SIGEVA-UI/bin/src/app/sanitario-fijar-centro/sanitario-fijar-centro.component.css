@@ -1,0 +1,10 @@
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+  font-size: 20px;
+}
+
+select{
+  width: 300px;
+}

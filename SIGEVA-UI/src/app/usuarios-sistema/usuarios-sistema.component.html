@@ -1,0 +1,26 @@
+<app-barra-navegacion></app-barra-navegacion>
+
+<div class="seccion contenedor">
+  <div class="separation"></div>
+  <h1 class="centrar-texto page-name">USUARIOS DEL SISTEMA: {{rolMostrado}}</h1>
+  <app-mensaje-configuracion></app-mensaje-configuracion>
+
+  <div class="contenedorFiltrar">
+
+    <h3>Filtrar por: </h3>
+    <select name="rol" [(ngModel)]="rolSeleccionado">
+      <option>Todos</option>
+      <option *ngFor="let rol of roles">{{rol.nombre}}</option>
+    </select>
+    <button class="btn" type="submit" (click)="cargarUsuarios()">FILTRAR</button>
+
+  </div>
+  <div class="separation"></div>
+
+  <div class="contenedor-items">
+    <app-usuario *ngFor="let usuario of usuarios"
+                 [usuario]=usuario
+                 [existeConfiguracion]=existeConfiguracion
+    ></app-usuario>
+  </div>
+</div>

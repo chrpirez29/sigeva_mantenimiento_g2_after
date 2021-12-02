@@ -1,0 +1,12 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<h2 mat-dialog-title><strong style="text-transform: uppercase">{{data.titulo}}</strong></h2>
+<mat-dialog-content class="mat-typography">
+  <h3>{{data.mensaje}}</h3>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+
+  <button mat-button mat-dialog-close style="color:#FF0000"><strong>Cancelar</strong></button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="color:#008000">Sí</button>
+</mat-dialog-actions>
+

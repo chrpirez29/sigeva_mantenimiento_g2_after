@@ -1,0 +1,48 @@
+@import url(https://weloveiconfonts.com/api/?family=entypo);
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+  font-size: 30px;
+
+}
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+  font-size: 20px;
+  color:black;
+}
+
+p {
+  font-size: 18px;
+  margin: 4px;
+}
+
+p.entypo-calendar {
+ float:right;
+}
+
+@keyframes shake {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }
+}
+
+.mensajeError {
+  color:red;
+  animation: 5s shake 10s infinite alternate;
+}
+
+h1 {
+  padding: 10px;
+  margin: 0px;
+  font-size: 35px;
+}
+
+
+
+

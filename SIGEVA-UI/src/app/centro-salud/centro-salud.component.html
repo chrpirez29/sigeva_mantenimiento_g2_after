@@ -1,0 +1,33 @@
+<div class="item centroSalud" *ngIf="!centroEliminado">
+  <div class="contenido-item centrar-texto">
+
+    <h1>{{cs.nombreCentro}}</h1>
+
+    <div class="alineacion-izquierda">
+      <mat-icon> place</mat-icon>
+      <p>{{cs.direccion}}</p>
+    </div>
+
+    <div class="control-group">
+      <div class="alineacion-izquierda">
+        <img src="../assets/icons/vaccine.png" alt="logo-vacuna">
+        <p class="centrar-texto">{{cs.numVacunasDisponibles}}</p>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="alineacion-botones">
+        <button class="btn-cancel" [disabled]="!existeConfiguracion" (click)="enviarDatosBack()">Eliminar
+        </button>
+        <button class="btn" type="submit" [disabled]="!existeConfiguracion" [routerLink]="['/editarCS', cs.id]">Editar
+        </button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <p class="resaltadoPositivo" *ngIf="message">{{message}}</p>
+      <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
+    </div>
+
+  </div>
+</div>

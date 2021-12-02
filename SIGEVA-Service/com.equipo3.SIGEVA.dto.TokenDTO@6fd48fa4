@@ -1,0 +1,1 @@
+2021-11-17 10:01:56.420  INFO 11868 --- [ionShutdownHook] org.mongodb.driver.connection            : Closed connection [connectionId{localValue:7, serverValue:492537}] to cluster0-shard-00-01.lyhnw.mongodb.net:27017 because the pool has been closed.
