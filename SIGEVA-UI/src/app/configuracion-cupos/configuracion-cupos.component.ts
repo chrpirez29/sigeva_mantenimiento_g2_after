@@ -78,9 +78,6 @@ export class ConfiguracionCuposComponent implements OnInit {
 
 
   calcularHoraFin() {
-    this.duracionJornadaMinutos = Number(this.duracionJornada.split(":")[1]);
-    this.duracionJornadaHoras = Number(this.duracionJornada.split(":")[0])
-
     if (this.duracionJornadaHoras <= 23 && this.duracionJornadaMinutos <= 59) {
       this.mensajeControlDuracion = '';
       if (this.fechaInicio != '') {
