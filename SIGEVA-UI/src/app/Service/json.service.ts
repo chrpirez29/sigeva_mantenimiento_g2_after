@@ -10,8 +10,8 @@ export class JsonService {
   url: string;
 
   constructor(private http: HttpClient) {
-    this.url = 'http://localhost:8080/';
-    //this.url = '';
+    //this.url = 'http://localhost:8080/';
+    this.url = '';
   }
 
   getJson(url: string): Observable<any> {
