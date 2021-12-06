@@ -220,6 +220,8 @@ public class UsuarioController {
 			oldUsuario.setUsername(newUsuarioDTO.getUsername());
 			oldUsuario.setCorreo(newUsuarioDTO.getCorreo());
 			oldUsuario.setHashPassword(newUsuarioDTO.getHashPassword());
+			if(!validarDni(newUsuarioDTO.getDni()))
+				throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 			oldUsuario.setDni(newUsuarioDTO.getDni());
 			oldUsuario.setNombre(newUsuarioDTO.getNombre());
 			oldUsuario.setApellidos(newUsuarioDTO.getApellidos());
@@ -302,4 +304,19 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
 	}
+	
+	private static boolean validarDni(String dni) {
+        boolean valido = false;
+        if(dni.length()!=9)
+            return valido;
+        for (int i = 0; i < dni.length()-1; i++) {
+            if (!Character.isDigit(dni.charAt(i))) {
+                return valido;
+            }
+        }
+        if(!Character.isAlphabetic(dni.charAt(8)))
+            return valido;
+        valido = true;
+        return valido;
+    }
 }
