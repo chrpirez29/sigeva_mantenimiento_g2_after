@@ -21,7 +21,6 @@ steps:
       # sonar.exclusions=*/.bin
       sonar.projectKey=ChristopherPirez_SIGEVA_MANTENIMIENTO---GRUPO-2
       sonar.projectName=SIGEVA_MANTENIMIENTO - GRUPO 2
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -32,8 +31,8 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
+    isJacocoCoverageReportXML: true
     sqMavenPluginVersionChoice: 'latest'
-    goals: 'package'
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
