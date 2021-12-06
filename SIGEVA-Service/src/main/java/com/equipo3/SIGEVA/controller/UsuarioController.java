@@ -3,6 +3,7 @@ package com.equipo3.SIGEVA.controller;
 import com.equipo3.SIGEVA.dao.RolDao;
 import com.equipo3.SIGEVA.dao.UsuarioDao;
 import com.equipo3.SIGEVA.dto.*;
+import com.equipo3.SIGEVA.exception.FechaNacimientoInvalidaException;
 import com.equipo3.SIGEVA.exception.IdentificadorException;
 import com.equipo3.SIGEVA.exception.UsuarioInvalidoException;
 import com.equipo3.SIGEVA.model.Administrador;
@@ -14,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +52,7 @@ public class UsuarioController {
 	private static final String PACIENTE = "Paciente";
 	private static final String SANITARIO = "Sanitario";
 	private static final String ADMINISTRADOR = "Administrador";
+
 
 	/**
 	 * Recurso web para la creación de un Administrador.
@@ -220,9 +225,13 @@ public class UsuarioController {
 			oldUsuario.setUsername(newUsuarioDTO.getUsername());
 			oldUsuario.setCorreo(newUsuarioDTO.getCorreo());
 			oldUsuario.setHashPassword(newUsuarioDTO.getHashPassword());
+			if(!validarDni(newUsuarioDTO.getDni()))
+				throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 			oldUsuario.setDni(newUsuarioDTO.getDni());
 			oldUsuario.setNombre(newUsuarioDTO.getNombre());
 			oldUsuario.setApellidos(newUsuarioDTO.getApellidos());
+			if(validarFechaNacimiento(newUsuarioDTO.getFechaNacimiento()))
+				throw new FechaNacimientoInvalidaException("La Fecha de Nacimiento es incorrecta");
 			oldUsuario.setFechaNacimiento(newUsuarioDTO.getFechaNacimiento());
 			oldUsuario.setImagen(newUsuarioDTO.getImagen());
 
@@ -244,6 +253,7 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
 	}
+	
 
 	/***
 	 * Recurso web para la eliminación de los usuarios.
@@ -301,5 +311,30 @@ public class UsuarioController {
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
+	}
+	
+	private static boolean validarDni(String dni) {
+        boolean valido = false;
+        if(dni.length()!=9)
+            return valido;
+        for (int i = 0; i < dni.length()-1; i++) {
+            if (!Character.isDigit(dni.charAt(i))) {
+                return valido;
+            }
+        }
+        if(!Character.isAlphabetic(dni.charAt(8)))
+            return valido;
+        valido = true;
+        return valido;
+    }
+	private static boolean validarFechaNacimiento(Date fecha) {
+		boolean valido = false;
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		LocalDate date = LocalDate.now();
+		Date fechahoy = Date.from(date.atStartOfDay(defaultZoneId).toInstant());
+		if(fechahoy.before(fecha))
+			valido = true;
+		
+		return valido;
 	}
 }
