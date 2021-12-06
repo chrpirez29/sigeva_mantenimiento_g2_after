@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.equipo3.SIGEVA.exception.NumVacunasInvalido;
+import com.equipo3.SIGEVA.exception.UsuarioInvalidoException;
 import com.equipo3.SIGEVA.model.Administrador;
 import com.equipo3.SIGEVA.model.CentroSalud;
 import com.equipo3.SIGEVA.model.Cita;
@@ -24,7 +25,7 @@ public class WrapperDTOtoModel {
 
 	private static final String UNDEFINED = "undefined";
 	
-	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO) {
+	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO) throws UsuarioInvalidoException {
 		Administrador administrador = new Administrador();
 		if (!administradorDTO.getIdUsuario().equals(UNDEFINED))
 			administrador.setIdUsuario(administradorDTO.getIdUsuario());
@@ -34,6 +35,8 @@ public class WrapperDTOtoModel {
 		administrador.setUsername(administradorDTO.getUsername());
 		administrador.setCorreo(administradorDTO.getCorreo());
 		administrador.setHashPassword(administradorDTO.getHashPassword());
+		if(!validarDni(administradorDTO.getDni()))
+			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 		administrador.setDni(administradorDTO.getDni());
 		administrador.setNombre(administradorDTO.getNombre());
 		administrador.setApellidos(administradorDTO.getApellidos());
@@ -42,7 +45,7 @@ public class WrapperDTOtoModel {
 		return administrador;
 	}
 
-	public static Sanitario sanitarioDTOtoSanitario(SanitarioDTO sanitarioDTO) {
+	public static Sanitario sanitarioDTOtoSanitario(SanitarioDTO sanitarioDTO) throws UsuarioInvalidoException {
 		Sanitario sanitario = new Sanitario();
 		if (!sanitarioDTO.getIdUsuario().equals(UNDEFINED))
 			sanitario.setIdUsuario(sanitarioDTO.getIdUsuario());
@@ -52,6 +55,8 @@ public class WrapperDTOtoModel {
 		sanitario.setUsername(sanitarioDTO.getUsername());
 		sanitario.setCorreo(sanitarioDTO.getCorreo());
 		sanitario.setHashPassword(sanitarioDTO.getHashPassword());
+		if(!validarDni(sanitarioDTO.getDni()))
+			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 		sanitario.setDni(sanitarioDTO.getDni());
 		sanitario.setNombre(sanitarioDTO.getNombre());
 		sanitario.setApellidos(sanitarioDTO.getApellidos());
@@ -60,7 +65,7 @@ public class WrapperDTOtoModel {
 		return sanitario;
 	}
 
-	public Paciente pacienteDTOtoPaciente(PacienteDTO pacienteDTO) {
+	public Paciente pacienteDTOtoPaciente(PacienteDTO pacienteDTO) throws UsuarioInvalidoException {
 		Paciente paciente = new Paciente();
 		if (!pacienteDTO.getIdUsuario().equals(UNDEFINED))
 			paciente.setIdUsuario(pacienteDTO.getIdUsuario());
@@ -70,6 +75,8 @@ public class WrapperDTOtoModel {
 		paciente.setUsername(pacienteDTO.getUsername());
 		paciente.setCorreo(pacienteDTO.getCorreo());
 		paciente.setHashPassword(pacienteDTO.getHashPassword());
+		if(!validarDni(pacienteDTO.getDni()))
+			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 		paciente.setDni(pacienteDTO.getDni());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setApellidos(pacienteDTO.getApellidos());
@@ -146,4 +153,19 @@ public class WrapperDTOtoModel {
 		cita.setDosis(citaDTO.getDosis());
 		return cita;
 	}
+	
+	private static boolean validarDni(String dni) {
+        boolean valido = false;
+        if(dni.length()!=9)
+            return valido;
+        for (int i = 0; i < dni.length()-1; i++) {
+            if (!Character.isDigit(dni.charAt(i))) {
+                return valido;
+            }
+        }
+        if(!Character.isAlphabetic(dni.charAt(8)))
+            return valido;
+        valido = true;
+        return valido;
+    }
 }
