@@ -1,10 +1,14 @@
 package com.equipo3.SIGEVA.dto;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.equipo3.SIGEVA.exception.FechaNacimientoInvalidaException;
 import com.equipo3.SIGEVA.exception.NumVacunasInvalido;
 import com.equipo3.SIGEVA.exception.UsuarioInvalidoException;
 import com.equipo3.SIGEVA.model.Administrador;
@@ -25,7 +29,7 @@ public class WrapperDTOtoModel {
 
 	private static final String UNDEFINED = "undefined";
 	
-	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO) throws UsuarioInvalidoException {
+	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO) throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
 		Administrador administrador = new Administrador();
 		if (!administradorDTO.getIdUsuario().equals(UNDEFINED))
 			administrador.setIdUsuario(administradorDTO.getIdUsuario());
@@ -40,12 +44,14 @@ public class WrapperDTOtoModel {
 		administrador.setDni(administradorDTO.getDni());
 		administrador.setNombre(administradorDTO.getNombre());
 		administrador.setApellidos(administradorDTO.getApellidos());
+		if(validarFechaNacimiento(administradorDTO.getFechaNacimiento()))
+			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
 		administrador.setFechaNacimiento(administradorDTO.getFechaNacimiento());
 		administrador.setImagen(administradorDTO.getImagen());
 		return administrador;
 	}
 
-	public static Sanitario sanitarioDTOtoSanitario(SanitarioDTO sanitarioDTO) throws UsuarioInvalidoException {
+	public static Sanitario sanitarioDTOtoSanitario(SanitarioDTO sanitarioDTO) throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
 		Sanitario sanitario = new Sanitario();
 		if (!sanitarioDTO.getIdUsuario().equals(UNDEFINED))
 			sanitario.setIdUsuario(sanitarioDTO.getIdUsuario());
@@ -60,12 +66,14 @@ public class WrapperDTOtoModel {
 		sanitario.setDni(sanitarioDTO.getDni());
 		sanitario.setNombre(sanitarioDTO.getNombre());
 		sanitario.setApellidos(sanitarioDTO.getApellidos());
+		if(validarFechaNacimiento(sanitarioDTO.getFechaNacimiento()))
+			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
 		sanitario.setFechaNacimiento(sanitarioDTO.getFechaNacimiento());
 		sanitario.setImagen(sanitarioDTO.getImagen());
 		return sanitario;
 	}
 
-	public Paciente pacienteDTOtoPaciente(PacienteDTO pacienteDTO) throws UsuarioInvalidoException {
+	public Paciente pacienteDTOtoPaciente(PacienteDTO pacienteDTO) throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
 		Paciente paciente = new Paciente();
 		if (!pacienteDTO.getIdUsuario().equals(UNDEFINED))
 			paciente.setIdUsuario(pacienteDTO.getIdUsuario());
@@ -80,6 +88,8 @@ public class WrapperDTOtoModel {
 		paciente.setDni(pacienteDTO.getDni());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setApellidos(pacienteDTO.getApellidos());
+		if(validarFechaNacimiento(pacienteDTO.getFechaNacimiento()))
+			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
 		paciente.setFechaNacimiento(pacienteDTO.getFechaNacimiento());
 		paciente.setImagen(pacienteDTO.getImagen());
 		paciente.setNumDosisAplicadas(encrypter.encriptar(String.valueOf(pacienteDTO.getNumDosisAplicadas())));
@@ -168,4 +178,15 @@ public class WrapperDTOtoModel {
         valido = true;
         return valido;
     }
+	
+	private static boolean validarFechaNacimiento(Date fecha) {
+		boolean valido = false;
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		LocalDate date = LocalDate.now();
+		Date fechahoy = Date.from(date.atStartOfDay(defaultZoneId).toInstant());
+		if(fechahoy.before(fecha))
+			valido = true;
+		
+		return valido;
+	}
 }
