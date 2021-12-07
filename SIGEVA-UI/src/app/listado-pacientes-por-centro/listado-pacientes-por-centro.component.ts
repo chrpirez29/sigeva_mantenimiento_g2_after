@@ -3,6 +3,8 @@ import { JsonService } from '../Service/json.service';
 import { HttpParams } from "@angular/common/http";
 import { Rol } from '../Model/rol';
 import { UsuarioConObjetos } from "../Model/Usuario-con-objetos";
+import {TokenService} from "../Service/token.service";
+import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-listado-pacientes',
@@ -14,17 +16,23 @@ export class ListadoPacientesPorCentroComponent implements OnInit {
 	existeConfiguracion = false;
 	roles: Rol[];
 	rolMostrado: string;
+	idUsuario : string | null;
 
-	constructor(private json: JsonService) {
+	constructor(private json: JsonService,private tokenService: TokenService, private router: Router) {
 		this.usuarios = [];
 		this.roles = [];
 		this.rolMostrado = "Paciente";
+		this.idUsuario = "";
 	}
 
 
 ngOnInit(): void {
-	this.cargarRoles();
-	this.cargarUsuarios();
+	if (this.tokenService.getToken() == null) {
+      this.router.navigate(['/login']);
+    } else {
+	  this.cargarRoles();
+      this.cargarUsuarios();
+    }
 }
 
 cargarRoles() {
@@ -51,9 +59,15 @@ cambiarRolaId() {
 
 cargarUsuarios() {
     this.cambiarRolaId();
+	this.getIdUsuario();
+    if (this.idUsuario == null) {
+      this.idUsuario = "";
+    }
+
 	let params = new HttpParams({
       fromObject: {
-        rol: this.rolMostrado
+        rol: this.rolMostrado,
+		idUsuario: this.idUsuario
       }
     });
 	this.json.getJsonP("user/getUsuariosByPacienteAndCentroSalud",params).subscribe(
@@ -63,4 +77,13 @@ cargarUsuarios() {
 			console.log(error);
 		});
 }
+
+  private getIdUsuario() {
+    if (this.idUsuario == null) {
+      this.idUsuario = "";
+    }
+
+	this.idUsuario = this.tokenService.getIdUsuario();
+
+  }
 }

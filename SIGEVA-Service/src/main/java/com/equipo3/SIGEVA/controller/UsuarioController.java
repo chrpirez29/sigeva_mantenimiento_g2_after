@@ -1,5 +1,6 @@
 package com.equipo3.SIGEVA.controller;
 
+import com.equipo3.SIGEVA.dao.CentroSaludDao;
 import com.equipo3.SIGEVA.dao.RolDao;
 import com.equipo3.SIGEVA.dao.UsuarioDao;
 import com.equipo3.SIGEVA.dto.*;
@@ -174,9 +175,18 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/getUsuariosByPacienteAndCentroSalud")
-	public List<UsuarioDTO> getUsuariosByPacienteAndCentroSalud(@RequestParam String rol) {
+	public List<UsuarioDTO> getUsuariosByPacienteAndCentroSalud(@RequestParam String rol, @RequestParam String idUsuario) {
 		try {
-			return wrapperModelToDTO.allUsuarioToUsuarioDTO(administradorDao.findAllByRol(rol));
+			Optional <Usuario> optUsuario = this.administradorDao.findById(idUsuario);
+			if (!optUsuario.isPresent()) {
+				throw new UsuarioInvalidoException("El usuario no ha iniciado sesión");
+			}
+			
+			Usuario usuario = optUsuario.get();
+			
+			String cs = usuario.getCentroSalud();
+			
+			return wrapperModelToDTO.allUsuarioToUsuarioDTO(administradorDao.findAllByRolAndCentroSalud(rol, cs));
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 		}
