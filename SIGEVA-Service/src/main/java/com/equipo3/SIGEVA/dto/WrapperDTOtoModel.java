@@ -17,6 +17,7 @@ import com.equipo3.SIGEVA.model.Cita;
 import com.equipo3.SIGEVA.model.ConfiguracionCupos;
 import com.equipo3.SIGEVA.model.Cupo;
 import com.equipo3.SIGEVA.model.Paciente;
+import com.equipo3.SIGEVA.model.PersonalDeCitas;
 import com.equipo3.SIGEVA.model.Rol;
 import com.equipo3.SIGEVA.model.Sanitario;
 import com.equipo3.SIGEVA.model.Vacuna;
@@ -94,6 +95,23 @@ public class WrapperDTOtoModel {
 		paciente.setImagen(pacienteDTO.getImagen());
 		paciente.setNumDosisAplicadas(encrypter.encriptar(String.valueOf(pacienteDTO.getNumDosisAplicadas())));
 		return paciente;
+	}
+	public static PersonalDeCitas personalDTOtoPersonalDeCitas(PersonalDeCitasDTO personalDTO) {
+		PersonalDeCitas personal = new PersonalDeCitas();
+		if (!personalDTO.getIdUsuario().equals(UNDEFINED))
+			personal.setIdUsuario(personalDTO.getIdUsuario());
+
+		personal.setRol(personalDTO.getRol().getId());
+		personal.setCentroSalud(personalDTO.getCentroSalud().getId());
+		personal.setUsername(personalDTO.getUsername());
+		personal.setCorreo(personalDTO.getCorreo());
+		personal.setHashPassword(personalDTO.getHashPassword());
+		personal.setDni(personalDTO.getDni());
+		personal.setNombre(personalDTO.getNombre());
+		personal.setApellidos(personalDTO.getApellidos());
+		personal.setFechaNacimiento(personalDTO.getFechaNacimiento());
+		personal.setImagen(personalDTO.getImagen());
+		return personal;
 	}
 
 	public CentroSalud centroSaludDTOtoCentroSalud(CentroSaludDTO centroSaludDTO) throws NumVacunasInvalido {

@@ -8,6 +8,7 @@ import com.equipo3.SIGEVA.exception.IdentificadorException;
 import com.equipo3.SIGEVA.exception.UsuarioInvalidoException;
 import com.equipo3.SIGEVA.model.Administrador;
 import com.equipo3.SIGEVA.model.Paciente;
+import com.equipo3.SIGEVA.model.PersonalDeCitas;
 import com.equipo3.SIGEVA.model.Sanitario;
 import com.equipo3.SIGEVA.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class UsuarioController {
 	private static final String PACIENTE = "Paciente";
 	private static final String SANITARIO = "Sanitario";
 	private static final String ADMINISTRADOR = "Administrador";
+	private static final String PERSONAL = "PersonalDeCitas";
 
 
 	/**
@@ -113,6 +115,22 @@ public class UsuarioController {
 			}
 
 			administradorDao.save(sanitario);
+
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+		}
+	}
+	
+	@PostMapping("/crearUsuarioPersonalDeCitas")
+	public void crearUsuarioPersonalDeCitas(@RequestBody PersonalDeCitasDTO personalDTO) {
+		try {
+			PersonalDeCitas personal = WrapperDTOtoModel.personalDTOtoPersonalDeCitas(personalDTO);
+			Optional<Usuario> optUsuario = administradorDao.findByUsername(personal.getUsername());
+			if (optUsuario.isPresent()) {
+				throw new UsuarioInvalidoException(FRASE_USUARIO_EXISTENTE);
+			}
+
+			administradorDao.save(personal);
 
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
@@ -245,6 +263,10 @@ public class UsuarioController {
 			case SANITARIO:
 				administradorDao.save(WrapperDTOtoModel.sanitarioDTOtoSanitario((SanitarioDTO) oldUsuario));
 				break;
+			case PERSONAL:
+				administradorDao.save(WrapperDTOtoModel.personalDTOtoPersonalDeCitas((PersonalDeCitasDTO) oldUsuario));
+				break;
+				
 			default:
 				throw new UsuarioInvalidoException("Rol no válido");
 			}
