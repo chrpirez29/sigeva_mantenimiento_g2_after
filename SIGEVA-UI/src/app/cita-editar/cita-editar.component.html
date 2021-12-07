@@ -18,11 +18,12 @@
     <div>
       <mat-form-field appearance="fill" *ngIf="daySelected && editMode" class="input-hora">
         <mat-label>Selecciona la nueva hora</mat-label>
-        <mat-select [ngModel]="cupoSeleccionado" name="hora" (ngModelChange)="onChangeHora($event)">
+        <mat-select [ngModel]="cupoSeleccionado" name="hora" (ngModelChange)="onChangeHora($event)" >
           <mat-option *ngFor="let rango of rangosHoras"
                       [value]="rango">{{rango.fechaYHoraInicio.toTimeString().substr(0, 5)}}</mat-option>
         </mat-select>
       </mat-form-field>
+      
     </div>
 
     <div class="alineacion-izquierda">
