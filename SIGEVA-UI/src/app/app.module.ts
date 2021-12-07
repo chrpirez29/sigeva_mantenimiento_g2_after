@@ -15,6 +15,7 @@ import {CrearUsuariosComponent} from './crear-usuarios/crear-usuarios.component'
 import {IndicarDosisVacunasComponent} from './indicar-dosis-vacunas/indicar-dosis-vacunas.component';
 import {UsuariosSistemaComponent} from './usuarios-sistema/usuarios-sistema.component';
 import {UsuarioComponent} from './usuario/usuario.component';
+import {UsuarioCentroComponent} from './usuario-centro/usuario-centro.component';
 import {SolicitarCitaComponent} from './solicitar-cita/solicitar-cita.component';
 import {CentroSaludComponent} from './centro-salud/centro-salud.component';
 import {CentrosSaludSistemaComponent} from './centros-salud-sistema/centros-salud-sistema.component';
@@ -40,6 +41,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MensajeConfiguracionComponent} from './mensaje-configuracion/mensaje-configuracion.component';
 import { CitaPedirComponent } from './cita-pedir/cita-pedir.component';
+import {VistaPersonalComponent} from './vista-personal/vista-personal.component';
 
 
 
@@ -53,6 +55,7 @@ import { CitaPedirComponent } from './cita-pedir/cita-pedir.component';
     IndicarDosisVacunasComponent,
     UsuariosSistemaComponent,
     UsuarioComponent,
+	UsuarioCentroComponent,
     SolicitarCitaComponent,
     CentroSaludComponent,
     CentrosSaludSistemaComponent,
@@ -68,6 +71,7 @@ import { CitaPedirComponent } from './cita-pedir/cita-pedir.component';
     CitaEditarComponent,
     MensajeConfiguracionComponent,
     CitaPedirComponent,
+	VistaPersonalComponent,
   ],
   imports: [
     BrowserModule,

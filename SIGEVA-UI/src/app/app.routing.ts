@@ -16,6 +16,7 @@ import {ListadoPacientesComponent} from "./listado-pacientes/listado-pacientes.c
 import {LoginComponent} from "./login/login.component";
 import {FuncionalidadesGuardService as guard} from "./guards/funcionalidades-guard.service";
 import {ContenedorCitasComponent} from "./contenedor-citas/contenedor-citas.component";
+import {VistaPersonalComponent} from "./vista-personal/vista-personal.component";
 
 const appRoutes: Routes = [
   {
@@ -73,6 +74,10 @@ const appRoutes: Routes = [
   {
     path: 'misCitas', component: ContenedorCitasComponent,
     canActivate: [guard], data: {expectedRol: ['Paciente', 'SuperAdmin']}
+  },
+{
+    path: 'vistaPersonal', component: VistaPersonalComponent,
+    canActivate: [guard], data: {expectedRol: ['PersonalDeCitas', 'SuperAdmin']}
   },
 
   {path: '**', redirectTo: '', pathMatch: 'full'}

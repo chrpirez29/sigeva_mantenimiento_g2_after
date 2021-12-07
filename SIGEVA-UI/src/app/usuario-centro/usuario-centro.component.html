@@ -24,7 +24,7 @@
       </div>
 
       <div class="alineacion-botones">
-        <button class="btn-cancel" [disabled]="!existeConfiguracion" (click)=openDialogEliminar()>Citas</button>
+        <button class="btn-select" routerLink="/vistaPersonal">Citas</button>
       </div>
     </div>
     <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
