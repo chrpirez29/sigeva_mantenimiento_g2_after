@@ -24,6 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ListadoPacientesComponent} from './listado-pacientes/listado-pacientes.component';
+import {ListadoPacientesPorCentroComponent} from './listado-pacientes-por-centro/listado-pacientes-por-centro.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -41,6 +42,7 @@ import {MensajeConfiguracionComponent} from './mensaje-configuracion/mensaje-con
 import { CitaPedirComponent } from './cita-pedir/cita-pedir.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,7 @@ import { CitaPedirComponent } from './cita-pedir/cita-pedir.component';
     CentrosSaludSistemaComponent,
     EditarUsuarioComponent,
     ListadoPacientesComponent,
+	ListadoPacientesPorCentroComponent,
     EditarUsuarioComponent,
     VentanaEmergenteComponent,
     ModificacionCentroSaludComponent,

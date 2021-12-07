@@ -11,6 +11,7 @@ import {SolicitarCitaComponent} from './solicitar-cita/solicitar-cita.component'
 import {CentrosSaludSistemaComponent} from './centros-salud-sistema/centros-salud-sistema.component';
 import {EditarUsuarioComponent} from "./editar-usuario/editar-usuario.component";
 import {ModificacionCentroSaludComponent} from "./modificacion-centro-salud/modificacion-centro-salud.component";
+import {ListadoPacientesPorCentroComponent} from "./listado-pacientes-por-centro/listado-pacientes-por-centro.component";
 import {ListadoPacientesComponent} from "./listado-pacientes/listado-pacientes.component";
 import {LoginComponent} from "./login/login.component";
 import {FuncionalidadesGuardService as guard} from "./guards/funcionalidades-guard.service";
@@ -62,6 +63,10 @@ const appRoutes: Routes = [
   {
     path: 'listarPacientes', component: ListadoPacientesComponent,
     canActivate: [guard], data: {expectedRol: ['Sanitario', 'SuperAdmin']}
+  },
+  {
+    path: 'listarPacientesPorCentro', component: ListadoPacientesPorCentroComponent,
+    canActivate: [guard], data: {expectedRol: ['PersonalDeCitas', 'SuperAdmin']}
   },
   {path: 'login', component: LoginComponent},
 

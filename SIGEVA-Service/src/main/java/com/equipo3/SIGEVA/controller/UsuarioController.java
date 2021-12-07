@@ -172,6 +172,15 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 		}
 	}
+	
+	@GetMapping("/getUsuariosByPacienteAndCentroSalud")
+	public List<UsuarioDTO> getUsuariosByPacienteAndCentroSalud(@RequestParam String rol) {
+		try {
+			return wrapperModelToDTO.allUsuarioToUsuarioDTO(administradorDao.findAllByRol(rol));
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+		}
+	}
 
 	/**
 	 * Método para la obtención de un paciente a partir de su identificador.
