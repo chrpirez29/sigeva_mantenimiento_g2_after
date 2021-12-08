@@ -35,8 +35,10 @@ import {BarraNavegacionComponent} from './barra-navegacion/barra-navegacion.comp
 import {MatInputModule} from "@angular/material/input";
 import {MatMenuModule} from "@angular/material/menu";
 import {ContenedorCitasComponent} from './contenedor-citas/contenedor-citas.component';
+import {ContenedorCitasPersonalComponent} from './contenedor-citasPersonal/contenedor-citasPersonal.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {CitaEditarComponent} from './cita-editar/cita-editar.component';
+import {CitaEditarPersonalComponent} from './cita-editarPersonal/cita-editarPersonal.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MensajeConfiguracionComponent} from './mensaje-configuracion/mensaje-configuracion.component';
@@ -72,6 +74,8 @@ import {VistaPersonalComponent} from './vista-personal/vista-personal.component'
     MensajeConfiguracionComponent,
     CitaPedirComponent,
 	VistaPersonalComponent,
+	ContenedorCitasPersonalComponent,
+	CitaEditarPersonalComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,6 @@ export class VistaPersonalComponent implements OnInit{
   mensajeError: string;
   citas: CitaConObjetos[];
   solicitada: boolean;
-  citas2: CitaConObjetos[] = [];
   idUsuario: string;
   msgNoCitas = "";
 
@@ -37,13 +36,12 @@ export class VistaPersonalComponent implements OnInit{
   }
 
   ngOnInit(): void {
-  this.getCitas();
   }
 
   solicitarCita() {
     let params = new HttpParams({
       fromObject: {
-        uuidPaciente: String(this.token.getIdUsuario())
+        uuidPaciente: String("c4af4126-76f0-4e1e-883e-89b7e5704d88")
       }
     });
     this.json.getJsonPJ("cita/buscarYAsignarCitas", params).subscribe(
@@ -58,19 +56,6 @@ export class VistaPersonalComponent implements OnInit{
         this.mensajeError = error.error.message;
       });
   }
-  getCitas() {
-    let params = new HttpParams({
-      fromObject: {
-        idPaciente: String("2157b7a5-bb87-4a85-8138-5c55258a1988")
-      }
-    });
-    this.json.getJsonPJ('/cita/obtenerCitasFuturasDelPaciente', params).subscribe(
-      data => {
-        this.citas2 = data;
-        if (this.citas2.length == 0) {
-          this.msgNoCitas = "No hay citas asignadas";
-        }
-      }
-    );
-  }
+
+
 }

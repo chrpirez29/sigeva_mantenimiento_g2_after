@@ -24,7 +24,8 @@
       </div>
 
       <div class="alineacion-botones">
-        <button class="btn-select" routerLink="/vistaPersonal">Citas</button>
+        <button class="btn-select" routerLink="/vistaPersonal" (click)="cogerId()">Solicitar</button>
+        <button class="btn-modificarCitaPersonal" routerLink="/modificarCitas" (click)="cogerId()" >Modificar</button>
       </div>
     </div>
     <p class="resaltadoNegativo" *ngIf="errorMessage">{{errorMessage}}</p>
