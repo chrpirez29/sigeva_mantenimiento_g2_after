@@ -38,10 +38,10 @@ export class VistaPersonalComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  solicitarCita() {
+  solicitarCita(id:string) {
     let params = new HttpParams({
       fromObject: {
-        uuidPaciente: String("c4af4126-76f0-4e1e-883e-89b7e5704d88")
+        uuidPaciente: String(id)
       }
     });
     this.json.getJsonPJ("cita/buscarYAsignarCitas", params).subscribe(
@@ -56,6 +56,14 @@ export class VistaPersonalComponent implements OnInit{
         this.mensajeError = error.error.message;
       });
   }
+	getId(): any {
+		this.json.getJson('/tokenUsuario/getId').subscribe(
+			id => {
+				this.solicitarCita(id)
+			}
+		);
+		;
+	}
 
 
 }
