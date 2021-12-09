@@ -8,7 +8,7 @@
       <div class="register-form">
         <h1>{{this.mensaje}}</h1>
         <div class="control-group">
-          <button *ngIf=!this.solicitada class="btn" (click)=getId() id="msgerror" [disabled]="mensajeError">Solicitar</button>
+          <button class="btn" (click)=getId() id="msgerror" [disabled]="solicitada">Solicitar</button>
         </div>
       </div>
     </div>
