@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static java.util.logging.Logger.getLogger;
 
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("cita")
 public class CitaController {
@@ -96,7 +96,6 @@ public class CitaController {
 		try {
 			pacienteDTO = wrapperModelToDTO.getPacienteDTOfromUuid(uuidPaciente);
 		} catch (IdentificadorException e) {
-			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente no contemplado en BBDD.");
 		}
 

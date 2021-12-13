@@ -29,7 +29,7 @@ import java.util.Optional;
  * @author Equipo3
  *
  */
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("centro")
 public class CentroController {

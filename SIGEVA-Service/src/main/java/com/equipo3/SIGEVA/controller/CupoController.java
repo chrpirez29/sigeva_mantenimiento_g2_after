@@ -39,7 +39,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static java.util.logging.Logger.getLogger;
 
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("cupo")
 public class CupoController {
@@ -213,7 +213,6 @@ public class CupoController {
 			try {
 				pacienteDTO = wrapperModelToDTO.getPacienteDTOfromUuid(uuidPaciente);
 			} catch (IdentificadorException e) {
-				e.printStackTrace();
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente no encontrado en BD.");
 			}
 			Date fechaInicio = CupoController.copia(fecha);

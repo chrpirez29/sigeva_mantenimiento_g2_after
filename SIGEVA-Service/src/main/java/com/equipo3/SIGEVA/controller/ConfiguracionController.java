@@ -21,7 +21,7 @@ import java.util.List;
  * @author Equipo3
  *
  */
-@CrossOrigin
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("cnfg")
 public class ConfiguracionController {
