@@ -1,5 +1,6 @@
 package com.equipo3.SIGEVA.dto;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -29,8 +30,9 @@ public class WrapperDTOtoModel {
 	private static Encriptador encrypter = new Encriptador();
 
 	private static final String UNDEFINED = "undefined";
-	
-	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO) throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
+
+	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO)
+			throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
 		Administrador administrador = new Administrador();
 		if (!administradorDTO.getIdUsuario().equals(UNDEFINED))
 			administrador.setIdUsuario(administradorDTO.getIdUsuario());
@@ -40,19 +42,20 @@ public class WrapperDTOtoModel {
 		administrador.setUsername(administradorDTO.getUsername());
 		administrador.setCorreo(administradorDTO.getCorreo());
 		administrador.setHashPassword(administradorDTO.getHashPassword());
-		if(!validarDni(administradorDTO.getDni()))
+		if (!validarDni(administradorDTO.getDni()))
 			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 		administrador.setDni(administradorDTO.getDni());
 		administrador.setNombre(administradorDTO.getNombre());
 		administrador.setApellidos(administradorDTO.getApellidos());
-		if(validarFechaNacimiento(administradorDTO.getFechaNacimiento()))
+		if (validarFechaNacimiento(administradorDTO.getFechaNacimiento()))
 			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
 		administrador.setFechaNacimiento(administradorDTO.getFechaNacimiento());
 		administrador.setImagen(administradorDTO.getImagen());
 		return administrador;
 	}
 
-	public static Sanitario sanitarioDTOtoSanitario(SanitarioDTO sanitarioDTO) throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
+	public static Sanitario sanitarioDTOtoSanitario(SanitarioDTO sanitarioDTO)
+			throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
 		Sanitario sanitario = new Sanitario();
 		if (!sanitarioDTO.getIdUsuario().equals(UNDEFINED))
 			sanitario.setIdUsuario(sanitarioDTO.getIdUsuario());
@@ -62,19 +65,20 @@ public class WrapperDTOtoModel {
 		sanitario.setUsername(sanitarioDTO.getUsername());
 		sanitario.setCorreo(sanitarioDTO.getCorreo());
 		sanitario.setHashPassword(sanitarioDTO.getHashPassword());
-		if(!validarDni(sanitarioDTO.getDni()))
+		if (!validarDni(sanitarioDTO.getDni()))
 			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 		sanitario.setDni(sanitarioDTO.getDni());
 		sanitario.setNombre(sanitarioDTO.getNombre());
 		sanitario.setApellidos(sanitarioDTO.getApellidos());
-		if(validarFechaNacimiento(sanitarioDTO.getFechaNacimiento()))
+		if (validarFechaNacimiento(sanitarioDTO.getFechaNacimiento()))
 			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
 		sanitario.setFechaNacimiento(sanitarioDTO.getFechaNacimiento());
 		sanitario.setImagen(sanitarioDTO.getImagen());
 		return sanitario;
 	}
 
-	public Paciente pacienteDTOtoPaciente(PacienteDTO pacienteDTO) throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
+	public Paciente pacienteDTOtoPaciente(PacienteDTO pacienteDTO)
+			throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
 		Paciente paciente = new Paciente();
 		if (!pacienteDTO.getIdUsuario().equals(UNDEFINED))
 			paciente.setIdUsuario(pacienteDTO.getIdUsuario());
@@ -84,18 +88,19 @@ public class WrapperDTOtoModel {
 		paciente.setUsername(pacienteDTO.getUsername());
 		paciente.setCorreo(pacienteDTO.getCorreo());
 		paciente.setHashPassword(pacienteDTO.getHashPassword());
-		if(!validarDni(pacienteDTO.getDni()))
+		if (!validarDni(pacienteDTO.getDni()))
 			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 		paciente.setDni(pacienteDTO.getDni());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setApellidos(pacienteDTO.getApellidos());
-		if(validarFechaNacimiento(pacienteDTO.getFechaNacimiento()))
+		if (validarFechaNacimiento(pacienteDTO.getFechaNacimiento()))
 			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
 		paciente.setFechaNacimiento(pacienteDTO.getFechaNacimiento());
 		paciente.setImagen(pacienteDTO.getImagen());
 		paciente.setNumDosisAplicadas(encrypter.encriptar(String.valueOf(pacienteDTO.getNumDosisAplicadas())));
 		return paciente;
 	}
+
 	public static PersonalDeCitas personalDTOtoPersonalDeCitas(PersonalDeCitasDTO personalDTO) {
 		PersonalDeCitas personal = new PersonalDeCitas();
 		if (!personalDTO.getIdUsuario().equals(UNDEFINED))
@@ -181,30 +186,52 @@ public class WrapperDTOtoModel {
 		cita.setDosis(citaDTO.getDosis());
 		return cita;
 	}
-	
+
 	private static boolean validarDni(String dni) {
-        boolean valido = false;
-        if(dni.length()!=9)
-            return valido;
-        for (int i = 0; i < dni.length()-1; i++) {
-            if (!Character.isDigit(dni.charAt(i))) {
-                return valido;
-            }
-        }
-        if(!Character.isAlphabetic(dni.charAt(8)))
-            return valido;
-        valido = true;
-        return valido;
-    }
-	
+		boolean valido = false;
+		if (dni != null) {
+			if (dni.length() != 9)
+				return valido;
+			for (int i = 0; i < dni.length() - 1; i++) {
+				if (!Character.isDigit(dni.charAt(i))) {
+					return valido;
+				}
+			}
+			if (!Character.isAlphabetic(dni.charAt(8)))
+				return valido;
+			valido = true;
+			return valido;
+		} else
+			valido = true;
+		return valido;
+
+	}
+
 	private static boolean validarFechaNacimiento(Date fecha) {
 		boolean valido = false;
 		ZoneId defaultZoneId = ZoneId.systemDefault();
 		LocalDate date = LocalDate.now();
 		Date fechahoy = Date.from(date.atStartOfDay(defaultZoneId).toInstant());
-		if(fechahoy.before(fecha))
+		if (fecha != null && (transformarFechas(fecha,fechahoy) && fechahoy.before(fecha))) {
 			valido = true;
-		
+			return valido;
+		}
+		if (fecha == null)
+			return valido;
 		return valido;
 	}
+
+	private static boolean transformarFechas(Date f1, Date f2) {
+		boolean valido = false;
+		SimpleDateFormat sdformat = new SimpleDateFormat("dd-MM-yyyy");
+		
+		String date1 = sdformat.format(f1);
+		String date2 = sdformat.format(f2);
+		if(date1.equals(date2)) {
+			return valido;
+		}
+		valido=true;
+		return valido;
+	}
+
 }

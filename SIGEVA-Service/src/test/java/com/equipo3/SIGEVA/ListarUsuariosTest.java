@@ -34,7 +34,7 @@ class ListarUsuariosTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Administrador", "Sanitario"})
+    @ValueSource(strings = {"Sanitario"})
     void getUsuariosSanitarios(String rol){
         RolDTO rolDTO = utilidades.getRolByNombre(rol);
         assertNotNull(usuarioController.getUsuarioByRol(rolDTO.getId()));

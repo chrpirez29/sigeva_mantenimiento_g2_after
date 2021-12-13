@@ -56,7 +56,6 @@ public class UsuarioController {
 	private static final String ADMINISTRADOR = "Administrador";
 	private static final String PERSONAL = "PersonalDeCitas";
 
-
 	/**
 	 * Recurso web para la creación de un Administrador.
 	 *
@@ -121,7 +120,7 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 		}
 	}
-	
+
 	@PostMapping("/crearUsuarioPersonalDeCitas")
 	public void crearUsuarioPersonalDeCitas(@RequestBody PersonalDeCitasDTO personalDTO) {
 		try {
@@ -173,19 +172,20 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
 		}
 	}
-	
+
 	@GetMapping("/getUsuariosByPacienteAndCentroSalud")
-	public List<UsuarioDTO> getUsuariosByPacienteAndCentroSalud(@RequestParam String rol, @RequestParam String idUsuario) {
+	public List<UsuarioDTO> getUsuariosByPacienteAndCentroSalud(@RequestParam String rol,
+			@RequestParam String idUsuario) {
 		try {
-			Optional <Usuario> optUsuario = this.administradorDao.findById(idUsuario);
+			Optional<Usuario> optUsuario = this.administradorDao.findById(idUsuario);
 			if (!optUsuario.isPresent()) {
 				throw new UsuarioInvalidoException("El usuario no ha iniciado sesión");
 			}
-			
+
 			Usuario usuario = optUsuario.get();
-			
+
 			String cs = usuario.getCentroSalud();
-			
+
 			return wrapperModelToDTO.allUsuarioToUsuarioDTO(administradorDao.findAllByRolAndCentroSalud(rol, cs));
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
@@ -262,19 +262,20 @@ public class UsuarioController {
 			oldUsuario.setUsername(newUsuarioDTO.getUsername());
 			oldUsuario.setCorreo(newUsuarioDTO.getCorreo());
 			oldUsuario.setHashPassword(newUsuarioDTO.getHashPassword());
-			if(!validarDni(newUsuarioDTO.getDni()))
+			if (!validarDni(newUsuarioDTO.getDni()))
 				throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
 			oldUsuario.setDni(newUsuarioDTO.getDni());
 			oldUsuario.setNombre(newUsuarioDTO.getNombre());
 			oldUsuario.setApellidos(newUsuarioDTO.getApellidos());
-			if(validarFechaNacimiento(newUsuarioDTO.getFechaNacimiento()))
+			if (validarFechaNacimiento(newUsuarioDTO.getFechaNacimiento()))
 				throw new FechaNacimientoInvalidaException("La Fecha de Nacimiento es incorrecta");
 			oldUsuario.setFechaNacimiento(newUsuarioDTO.getFechaNacimiento());
 			oldUsuario.setImagen(newUsuarioDTO.getImagen());
 
 			switch (newUsuarioDTO.getRol().getNombre()) {
 			case ADMINISTRADOR:
-				administradorDao.save(this.wrapperDTOtoModel.administradorDTOtoAdministrador((AdministradorDTO) oldUsuario));
+				administradorDao
+						.save(this.wrapperDTOtoModel.administradorDTOtoAdministrador((AdministradorDTO) oldUsuario));
 				break;
 			case PACIENTE:
 				administradorDao.save(this.wrapperDTOtoModel.pacienteDTOtoPaciente((PacienteDTO) oldUsuario));
@@ -285,7 +286,7 @@ public class UsuarioController {
 			case PERSONAL:
 				administradorDao.save(WrapperDTOtoModel.personalDTOtoPersonalDeCitas((PersonalDeCitasDTO) oldUsuario));
 				break;
-				
+
 			default:
 				throw new UsuarioInvalidoException("Rol no válido");
 			}
@@ -294,7 +295,6 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
 	}
-	
 
 	/***
 	 * Recurso web para la eliminación de los usuarios.
@@ -353,29 +353,39 @@ public class UsuarioController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
 	}
-	
+
 	private static boolean validarDni(String dni) {
-        boolean valido = false;
-        if(dni.length()!=9)
-            return valido;
-        for (int i = 0; i < dni.length()-1; i++) {
-            if (!Character.isDigit(dni.charAt(i))) {
-                return valido;
-            }
-        }
-        if(!Character.isAlphabetic(dni.charAt(8)))
-            return valido;
-        valido = true;
-        return valido;
-    }
+		boolean valido = false;
+		if (dni != null) {
+			if (dni.length() != 9)
+				return valido;
+			for (int i = 0; i < dni.length() - 1; i++) {
+				if (!Character.isDigit(dni.charAt(i))) {
+					return valido;
+				}
+			}
+			if (!Character.isAlphabetic(dni.charAt(8)))
+				return valido;
+			valido = true;
+			return valido;
+		}
+		else
+			valido = true;
+		return valido;
+
+	}
+
 	private static boolean validarFechaNacimiento(Date fecha) {
 		boolean valido = false;
 		ZoneId defaultZoneId = ZoneId.systemDefault();
 		LocalDate date = LocalDate.now();
 		Date fechahoy = Date.from(date.atStartOfDay(defaultZoneId).toInstant());
-		if(fechahoy.before(fecha))
+		if (fecha != null && fechahoy.before(fecha)) {
 			valido = true;
-		
+			return valido;
+		}
+		if (fecha ==null)
+			return valido;
 		return valido;
 	}
 }
