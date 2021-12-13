@@ -256,17 +256,17 @@ public class WrapperModelToDTO {
 
 				PacienteDTO pacienteDTO = new PacienteDTO();
 
-				pacienteDTO.setIdUsuario(paciente.getIdUsuario());
 				pacienteDTO.setRol(getRolDTOfromUuid(paciente.getRol()));
-				pacienteDTO.setCentroSalud(getCentroSaludDTOfromUuid(paciente.getCentroSalud()));
+				pacienteDTO.setIdUsuario(paciente.getIdUsuario());
 				pacienteDTO.setUsername(paciente.getUsername());
-				pacienteDTO.setCorreo(paciente.getCorreo());
+				pacienteDTO.setCentroSalud(getCentroSaludDTOfromUuid(paciente.getCentroSalud()));
 				pacienteDTO.setHashPassword(paciente.getHashPassword());
+				pacienteDTO.setCorreo(paciente.getCorreo());
 				pacienteDTO.setDni(paciente.getDni());
-				pacienteDTO.setNombre(paciente.getNombre());
 				pacienteDTO.setApellidos(paciente.getApellidos());
-				pacienteDTO.setFechaNacimiento(paciente.getFechaNacimiento());
+				pacienteDTO.setNombre(paciente.getNombre());
 				pacienteDTO.setImagen(paciente.getImagen());
+				pacienteDTO.setFechaNacimiento(paciente.getFechaNacimiento());
 				pacienteDTO.setNumDosisAplicadas(
 						Integer.parseInt((encrypter.desencriptar(paciente.getNumDosisAplicadas()))));
 
