@@ -31,7 +31,7 @@ ngOnInit(): void {
       this.router.navigate(['/login']);
     } else {
 	  this.cargarRoles();
-      this.cargarUsuarios();
+	  this.cargarUsuarios();
     }
 }
 

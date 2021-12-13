@@ -110,16 +110,6 @@ public class Usuario {
 	}
 
 	/***
-	 * Método para la devolución del nombre de usuario.
-	 * 
-	 * @return username; nombre de usuario.
-	 */
-
-	public String getUsername() {
-		return username;
-	}
-
-	/***
 	 * Método para la actualización del nombre de usuario.
 	 * 
 	 * @param username; nombre de usuario nuevo.
@@ -128,15 +118,15 @@ public class Usuario {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	/***
-	 * Método para la devolución del correo electrónico de usuario.
+	 * Método para la devolución del nombre de usuario.
 	 * 
-	 * @return correo; correo electrónico de usuario.
+	 * @return username; nombre de usuario.
 	 */
 
-	public String getCorreo() {
-		return correo;
+	public String getUsername() {
+		return username;
 	}
 
 	/***
@@ -148,15 +138,15 @@ public class Usuario {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-
+	
 	/***
-	 * Método para la devolución del hash de la contraseña del usuario.
+	 * Método para la devolución del correo electrónico de usuario.
 	 * 
-	 * @return hashPassword; hash de la contraseña del usuario.
+	 * @return correo; correo electrónico de usuario.
 	 */
 
-	public String getHashPassword() {
-		return hashPassword;
+	public String getCorreo() {
+		return correo;
 	}
 
 	/***
@@ -168,15 +158,15 @@ public class Usuario {
 	public void setHashPassword(String hashPassword) {
 		this.hashPassword = hashPassword;
 	}
-
+	
 	/***
-	 * Método para la devolución del dni de usuario.
+	 * Método para la devolución del hash de la contraseña del usuario.
 	 * 
-	 * @return dni; dni de usuario.
+	 * @return hashPassword; hash de la contraseña del usuario.
 	 */
 
-	public String getDni() {
-		return dni;
+	public String getHashPassword() {
+		return hashPassword;
 	}
 
 	/***
@@ -190,13 +180,13 @@ public class Usuario {
 	}
 
 	/***
-	 * Método para la devolución del nombre de usuario.
+	 * Método para la devolución del dni de usuario.
 	 * 
-	 * @return nombre; nombre de usuario.
+	 * @return dni; dni de usuario.
 	 */
 
-	public String getNombre() {
-		return nombre;
+	public String getDni() {
+		return dni;
 	}
 
 	/***
@@ -210,13 +200,13 @@ public class Usuario {
 	}
 
 	/***
-	 * Método para la devolución de los apellidos del usuario.
+	 * Método para la devolución del nombre de usuario.
 	 * 
-	 * @return apellidos; apellidos del usuario.
+	 * @return nombre; nombre de usuario.
 	 */
 
-	public String getApellidos() {
-		return apellidos;
+	public String getNombre() {
+		return nombre;
 	}
 
 	/***
@@ -230,13 +220,13 @@ public class Usuario {
 	}
 
 	/***
-	 * Método para la devolución de la fecha de nacimiento del usuario.
+	 * Método para la devolución de los apellidos del usuario.
 	 * 
-	 * @return fechaNacimiento; fecha de nacimiento del usuario.
+	 * @return apellidos; apellidos del usuario.
 	 */
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
+	public String getApellidos() {
+		return apellidos;
 	}
 
 	/***
@@ -248,15 +238,15 @@ public class Usuario {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
+	
 	/***
-	 * Método para la devolución de la foto del usuario.
+	 * Método para la devolución de la fecha de nacimiento del usuario.
 	 * 
-	 * @return imagen; foto del usuario.
+	 * @return fechaNacimiento; fecha de nacimiento del usuario.
 	 */
 
-	public String getImagen() {
-		return imagen;
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 	/***
@@ -267,5 +257,15 @@ public class Usuario {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+	
+	/***
+	 * Método para la devolución de la foto del usuario.
+	 * 
+	 * @return imagen; foto del usuario.
+	 */
+
+	public String getImagen() {
+		return imagen;
 	}
 }

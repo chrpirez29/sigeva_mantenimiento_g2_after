@@ -72,7 +72,7 @@ public class CitaController {
 	@Autowired
 	CentroSaludDao centroSaludDao;
 
-	final Logger LOG = getLogger(com.equipo3.SIGEVA.controller.CitaController.class.toString()) ;
+	final Logger log = getLogger(com.equipo3.SIGEVA.controller.CitaController.class.toString()) ;
 
 	private static final int PRIMERA_DOSIS = 1;
 	private static final int SEGUNDA_DOSIS = 2;
@@ -529,7 +529,7 @@ public class CitaController {
 			cupoController.decrementarTamanoActualCupo(citaDTO.getCupo().getUuidCupo());
 		} catch (CupoException e) {
 			// Cupo no existente en la BD.
-			LOG.log(Level.INFO, e.getMessage());
+			log.log(Level.INFO, e.getMessage());
 		}
 
 		// Si se elimina la primera dosis, la segunda pasa a la primera.
@@ -601,7 +601,7 @@ public class CitaController {
 		try {
 			cupoController.anularTamanoActual(uuidCupo);
 		} catch (CupoException e) {
-			LOG.log(Level.INFO, e.getMessage());
+			log.log(Level.INFO, e.getMessage());
 		}
 	}
 
