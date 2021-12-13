@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.equipo3.SIGEVA.dao.TokenUsuarioDao;
 import com.equipo3.SIGEVA.model.TokenUsuario;
 
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("https://segevamantenimientog3.herokuapp.com/")
 @RestController
 @RequestMapping("tokenUsuario")
 public class TokenUsuarioController {

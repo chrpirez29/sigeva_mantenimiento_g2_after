@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static java.util.logging.Logger.getLogger;
 
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("https://segevamantenimientog3.herokuapp.com/")
 @RestController
 @RequestMapping("cita")
 public class CitaController {

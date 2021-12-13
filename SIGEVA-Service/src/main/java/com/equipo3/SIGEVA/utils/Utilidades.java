@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.equipo3.SIGEVA.exception.IdentificadorException;
 import com.equipo3.SIGEVA.model.Usuario;
 
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("https://segevamantenimientog3.herokuapp.com/")
 @RestController
 public class Utilidades {
 
