@@ -21,7 +21,7 @@ import java.util.List;
  * @author Equipo3
  *
  */
-@CrossOrigin("https://segevamantenimientog3.herokuapp.com/")
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("cnfg")
 public class ConfiguracionController {

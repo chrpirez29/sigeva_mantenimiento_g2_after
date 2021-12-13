@@ -25,7 +25,7 @@ import java.util.Optional;
  *
  * @author Equipo3
  */
-@CrossOrigin("https://segevamantenimientog3.herokuapp.com/")
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("user")
 public class UsuarioController {
