@@ -69,8 +69,6 @@ export class CitaEditarPersonalComponent {
 
 
 	}
-
-
 	openDialogGuardar() {
 		let self = this;
 		const dialogRef = this.dialog.open(VentanaEmergenteComponent, {
