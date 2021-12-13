@@ -65,7 +65,7 @@ public class CupoController {
 	@Autowired
 	WrapperDTOtoModel wrapperDTOtoModel;
 
-	final Logger LOG = getLogger(com.equipo3.SIGEVA.controller.CitaController.class.toString()) ;
+	final Logger log = getLogger(com.equipo3.SIGEVA.controller.CitaController.class.toString()) ;
 
 	/**
 	 * El método ayudará a calcular cuáles son exactamente los cupos de un centro en

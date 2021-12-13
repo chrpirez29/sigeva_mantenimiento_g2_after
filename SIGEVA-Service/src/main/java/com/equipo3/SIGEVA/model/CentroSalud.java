@@ -36,15 +36,6 @@ public class CentroSalud {
 	}
 
 	/***
-	 * Método para la devolución del identificador.
-	 * 
-	 * @return Id identificador.
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/***
 	 * Método para la actualización del identificador.
 	 * 
 	 * @param id Identificador nuevo.
@@ -52,14 +43,14 @@ public class CentroSalud {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	/***
-	 * Método para la devolución del nombre de centro de salud.
+	 * Método para la devolución del identificador.
 	 * 
-	 * @return nombreCentro Devolución del nombre de centro de salud.
+	 * @return Id identificador.
 	 */
-	public String getNombreCentro() {
-		return nombreCentro;
+	public String getId() {
+		return id;
 	}
 
 	/***
@@ -70,7 +61,7 @@ public class CentroSalud {
 	public void setNombreCentro(String nombreCentro) {
 		this.nombreCentro = nombreCentro;
 	}
-
+	
 	/***
 	 * Método para la devolución de las dosis disponibles.
 	 * 
@@ -78,6 +69,15 @@ public class CentroSalud {
 	 */
 	public int getNumVacunasDisponibles() {
 		return numVacunasDisponibles;
+	}
+	
+	/***
+	 * Método para la devolución del nombre de centro de salud.
+	 * 
+	 * @return nombreCentro Devolución del nombre de centro de salud.
+	 */
+	public String getNombreCentro() {
+		return nombreCentro;
 	}
 
 	/***
@@ -95,6 +95,15 @@ public class CentroSalud {
 	}
 
 	/***
+	 * Método para la actualización de la dirección del centro de salud
+	 * 
+	 * @param direccion Nueva dirección que va a tener el centro de salud.
+	 */
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	
+	/***
 	 * Método para la devolución de las dirección del centro de salud.
 	 * 
 	 * @return direccion Devuelve la dirección del centro de salud.
@@ -104,14 +113,14 @@ public class CentroSalud {
 	}
 
 	/***
-	 * Método para la actualización de la dirección del centro de salud
+	 * Método para la actualización del objeto vacuna en el centro de salud.
 	 * 
-	 * @param direccion Nueva dirección que va a tener el centro de salud.
+	 * @param vacuna Vacuna nueva que va tener el centro de salud.
 	 */
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setVacuna(String vacuna) {
+		this.vacuna = vacuna;
 	}
-
+	
 	/***
 	 * Metodo para la devolución del objeto vacuna
 	 * 
@@ -119,14 +128,5 @@ public class CentroSalud {
 	 */
 	public String getVacuna() {
 		return vacuna;
-	}
-
-	/***
-	 * Método para la actualización del objeto vacuna en el centro de salud.
-	 * 
-	 * @param vacuna Vacuna nueva que va tener el centro de salud.
-	 */
-	public void setVacuna(String vacuna) {
-		this.vacuna = vacuna;
 	}
 }

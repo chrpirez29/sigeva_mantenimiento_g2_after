@@ -30,6 +30,9 @@ public class WrapperDTOtoModel {
 	private static Encriptador encrypter = new Encriptador();
 
 	private static final String UNDEFINED = "undefined";
+	private static final String DNIEXCEPT = "El formato de DNI es incorrecto";
+	private static final String DATEEXCEPT = "La Fecha de nacimiento es incorrecta";
+
 
 	public Administrador administradorDTOtoAdministrador(AdministradorDTO administradorDTO)
 			throws UsuarioInvalidoException, FechaNacimientoInvalidaException {
@@ -43,12 +46,12 @@ public class WrapperDTOtoModel {
 		administrador.setCorreo(administradorDTO.getCorreo());
 		administrador.setHashPassword(administradorDTO.getHashPassword());
 		if (!validarDni(administradorDTO.getDni()))
-			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
+			throw new UsuarioInvalidoException(DNIEXCEPT);
 		administrador.setDni(administradorDTO.getDni());
 		administrador.setNombre(administradorDTO.getNombre());
 		administrador.setApellidos(administradorDTO.getApellidos());
 		if (validarFechaNacimiento(administradorDTO.getFechaNacimiento()))
-			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
+			throw new FechaNacimientoInvalidaException(DATEEXCEPT);
 		administrador.setFechaNacimiento(administradorDTO.getFechaNacimiento());
 		administrador.setImagen(administradorDTO.getImagen());
 		return administrador;
@@ -66,12 +69,12 @@ public class WrapperDTOtoModel {
 		sanitario.setCorreo(sanitarioDTO.getCorreo());
 		sanitario.setHashPassword(sanitarioDTO.getHashPassword());
 		if (!validarDni(sanitarioDTO.getDni()))
-			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
+			throw new UsuarioInvalidoException(DNIEXCEPT);
 		sanitario.setDni(sanitarioDTO.getDni());
 		sanitario.setNombre(sanitarioDTO.getNombre());
 		sanitario.setApellidos(sanitarioDTO.getApellidos());
 		if (validarFechaNacimiento(sanitarioDTO.getFechaNacimiento()))
-			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
+			throw new FechaNacimientoInvalidaException(DATEEXCEPT);
 		sanitario.setFechaNacimiento(sanitarioDTO.getFechaNacimiento());
 		sanitario.setImagen(sanitarioDTO.getImagen());
 		return sanitario;
@@ -89,12 +92,12 @@ public class WrapperDTOtoModel {
 		paciente.setCorreo(pacienteDTO.getCorreo());
 		paciente.setHashPassword(pacienteDTO.getHashPassword());
 		if (!validarDni(pacienteDTO.getDni()))
-			throw new UsuarioInvalidoException("El formato de DNI es incorrecto");
+			throw new UsuarioInvalidoException(DNIEXCEPT);
 		paciente.setDni(pacienteDTO.getDni());
 		paciente.setNombre(pacienteDTO.getNombre());
 		paciente.setApellidos(pacienteDTO.getApellidos());
 		if (validarFechaNacimiento(pacienteDTO.getFechaNacimiento()))
-			throw new FechaNacimientoInvalidaException("La Fecha de nacimiento es incorrecta");
+			throw new FechaNacimientoInvalidaException(DATEEXCEPT);
 		paciente.setFechaNacimiento(pacienteDTO.getFechaNacimiento());
 		paciente.setImagen(pacienteDTO.getImagen());
 		paciente.setNumDosisAplicadas(encrypter.encriptar(String.valueOf(pacienteDTO.getNumDosisAplicadas())));
@@ -207,6 +210,19 @@ public class WrapperDTOtoModel {
 
 	}
 
+	private static boolean transformarFechas(Date f1, Date f2) {
+		boolean valido = false;
+		SimpleDateFormat sdformat = new SimpleDateFormat("dd-MM-yyyy");
+		
+		String date1 = sdformat.format(f1);
+		String date2 = sdformat.format(f2);
+		if(date1.equals(date2)) {
+			return valido;
+		}
+		valido=true;
+		return valido;
+	}
+	
 	private static boolean validarFechaNacimiento(Date fecha) {
 		boolean valido = false;
 		ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -218,19 +234,6 @@ public class WrapperDTOtoModel {
 		}
 		if (fecha == null)
 			return valido;
-		return valido;
-	}
-
-	private static boolean transformarFechas(Date f1, Date f2) {
-		boolean valido = false;
-		SimpleDateFormat sdformat = new SimpleDateFormat("dd-MM-yyyy");
-		
-		String date1 = sdformat.format(f1);
-		String date2 = sdformat.format(f2);
-		if(date1.equals(date2)) {
-			return valido;
-		}
-		valido=true;
 		return valido;
 	}
 

@@ -1,6 +1,5 @@
 package com.equipo3.SIGEVA.controller;
 
-import com.equipo3.SIGEVA.dao.CentroSaludDao;
 import com.equipo3.SIGEVA.dao.RolDao;
 import com.equipo3.SIGEVA.dao.UsuarioDao;
 import com.equipo3.SIGEVA.dto.*;
